@@ -1,2 +1,2 @@
-App.java
- App
+ru/stqa/java_course/sandbox/App.java
+ ru.stqa.java_course.sandbox.App
