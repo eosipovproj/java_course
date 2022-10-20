@@ -10,10 +10,11 @@ public class Exercise2 {
                 "(" + p2.x + ", " + p2.y + ")" + " = " + distance(p1, p2));
 */
         //пункт 4
-        Point p = new Point(5, 7, 8, 9);
+        Point p1 = new Point(5, 7);
+        Point p2 = new Point(8, 9);
         System.out.println("Расстояние между двумя точками на плоскости " + "p1 = " +
-                "(" + p.x1 + ", " + p.y2 + ")"  + " и " + "p2 = " +
-                "(" + p.x2 + ", " + p.y2 + ")" + " = " + p.distance());
+                "(" + p1.x + ", " + p1.y + ")"  + " и " + "p2 = " +
+                "(" + p2.x + ", " + p2.y + ")" + " = " + p1.distance(p2));
     }
 /*
  Пункт 2
