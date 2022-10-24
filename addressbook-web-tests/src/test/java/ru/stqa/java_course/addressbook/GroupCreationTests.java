@@ -37,7 +37,6 @@ public class GroupCreationTests {
     fillGroupForm(new GroupDate("test1", "test header", "test comment"));
     submitGroupCreation();
     returnToGroupPage();
-    logout();
   }
 
   private void logout() {
@@ -75,6 +74,7 @@ public class GroupCreationTests {
 
   @AfterMethod(alwaysRun = true)
   public void tearDown() throws Exception {
+    logout();
     wd.quit();
 
   }
