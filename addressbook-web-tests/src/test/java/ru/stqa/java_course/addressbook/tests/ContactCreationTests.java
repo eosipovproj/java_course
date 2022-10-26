@@ -4,7 +4,7 @@ import org.testng.annotations.Test;
 import ru.stqa.java_course.addressbook.model.ContactDate;
 
 
-public class ContactCreationTest extends TestBase {
+public class ContactCreationTests extends TestBase {
 
   @Test
   public void testContactCreation() throws Exception {
