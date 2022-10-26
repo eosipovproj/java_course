@@ -2,39 +2,25 @@ package ru.stqa.java_course.addressbook.appmanager;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import ru.stqa.java_course.addressbook.model.ContactDate;
 
-public class ContactHelper {
-    private WebDriver wd;
-
+public class ContactHelper extends BaseHelper{
     public ContactHelper(WebDriver wd) {
-        this.wd = wd;
+        super(wd);
     }
-
     public void submitContactCreation() {
-      wd.findElement(By.xpath("//div[@id='content']/form/input[21]")).click();
+        click(By.xpath("//div[@id='content']/form/input[21]"));
     }
 
-    public void fillContactForm(ContactDate contactDate) {
-      wd.get("http://localhost/addressbook/edit.php");
-      wd.findElement(By.name("firstname")).click();
-      wd.findElement(By.name("firstname")).clear();
-      wd.findElement(By.name("firstname")).sendKeys(contactDate.getFirstname());
-      wd.findElement(By.name("lastname")).click();
-      wd.findElement(By.name("lastname")).clear();
-      wd.findElement(By.name("lastname")).sendKeys(contactDate.getLastname());
-      wd.findElement(By.name("address")).click();
-      wd.findElement(By.name("address")).clear();
-      wd.findElement(By.name("address")).sendKeys(contactDate.getAddress());
-      wd.findElement(By.name("mobile")).click();
-      wd.findElement(By.name("mobile")).clear();
-      wd.findElement(By.name("mobile")).sendKeys(contactDate.getMobile());
-      wd.findElement(By.name("email")).click();
-      wd.findElement(By.name("email")).clear();
-      wd.findElement(By.name("email")).sendKeys(contactDate.getEmail());
+    public void fillContactForm(String firstname, String lastname, String address, String mobile, String email) {
+        type(By.name("firstname"), firstname);
+        type(By.name("lastname"), lastname);
+        type(By.name("address"), address);
+        type(By.name("mobile"), mobile);
+        type(By.name("email"), email);
+
     }
 
     public void initContactCreation() {
-      wd.findElement(By.linkText("add new")).click();
+        click(By.linkText("add new"));
     }
 }

@@ -3,19 +3,17 @@ package ru.stqa.java_course.addressbook.appmanager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class NavigationHelper {
-    private WebDriver wd;
+public class NavigationHelper extends BaseHelper{
 
     public NavigationHelper(WebDriver wd) {
-        this.wd = wd;
+        super(wd);
     }
 
-    public void gotoGroupPage() {
-      wd.findElement(By.linkText("groups")).click();
+    public void goToGroupPage() {
+        click(By.linkText("groups"));
     }
 
     public void returnHomePage() {
-        wd.findElement(By.linkText("home page")).click();
-        wd.get("http://localhost/addressbook/index.php");
+        click(By.linkText("home page"));
     }
 }
