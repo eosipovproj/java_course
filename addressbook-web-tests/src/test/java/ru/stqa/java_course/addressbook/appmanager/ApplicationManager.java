@@ -14,25 +14,16 @@ public class ApplicationManager {
     public void init() {
         wd = new ChromeDriver();
         wd.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
-       // js = (JavascriptExecutor) wd;
         groupsHelper = new GroupsHelper(wd);
         navigationHelper = new NavigationHelper(wd);
         contactHelper = new ContactHelper(wd);
         sessionHelper = new SessionHelper(wd);
-        wd.get("http://localhost//addressbook//group.php");
+        wd.get("http://localhost/addressbook/group.php");
         sessionHelper.login("admin", "secret");
     }
         public void stop() {
         sessionHelper.logout();
         wd.quit();
-    }
-    private boolean isElementPresent(By by) {
-        try {
-            wd.findElement(by);
-            return true;
-        } catch (NoSuchElementException e) {
-            return false;
-        }
     }
 
     public GroupsHelper getGroupsHelper() {
