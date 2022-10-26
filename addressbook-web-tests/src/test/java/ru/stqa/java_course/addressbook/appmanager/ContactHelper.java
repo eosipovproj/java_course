@@ -2,6 +2,7 @@ package ru.stqa.java_course.addressbook.appmanager;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import ru.stqa.java_course.addressbook.model.ContactDate;
 
 public class ContactHelper extends BaseHelper{
     public ContactHelper(WebDriver wd) {
@@ -11,12 +12,12 @@ public class ContactHelper extends BaseHelper{
         click(By.xpath("//div[@id='content']/form/input[21]"));
     }
 
-    public void fillContactForm(String firstname, String lastname, String address, String mobile, String email) {
-        type(By.name("firstname"), firstname);
-        type(By.name("lastname"), lastname);
-        type(By.name("address"), address);
-        type(By.name("mobile"), mobile);
-        type(By.name("email"), email);
+    public void fillContactForm(ContactDate contactDate) {
+        type(By.name("firstname"), contactDate.getFirstname());
+        type(By.name("lastname"), contactDate.getLastname());
+        type(By.name("address"), contactDate.getAddress());
+        type(By.name("mobile"), contactDate.getMobile());
+        type(By.name("email"), contactDate.getEmail());
 
     }
 
