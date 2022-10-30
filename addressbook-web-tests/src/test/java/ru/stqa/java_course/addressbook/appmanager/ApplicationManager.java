@@ -1,7 +1,11 @@
 package ru.stqa.java_course.addressbook.appmanager;
 
-import org.openqa.selenium.*;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.remote.Browser;
+
 import java.time.Duration;
 
 public class ApplicationManager {
@@ -10,9 +14,20 @@ public class ApplicationManager {
     private ContactHelper contactHelper;
     private SessionHelper sessionHelper;
     WebDriver wd;
+    private String browser;
+
+    public ApplicationManager(String browser) {
+        this.browser = browser;
+    }
 
     public void init() {
-        wd = new ChromeDriver();
+        if (browser == Browser.CHROME.browserName()) {
+            wd = new ChromeDriver();
+        } else if (browser == Browser.IE.browserName()) {
+            wd = new InternetExplorerDriver();
+        } else if (browser == Browser.FIREFOX.browserName()) {
+            wd = new FirefoxDriver();
+        }
         wd.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
         groupsHelper = new GroupsHelper(wd);
         navigationHelper = new NavigationHelper(wd);
