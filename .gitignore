@@ -15,3 +15,5 @@ gradle-app.setting
 /sandbox/out/
 out/
 /addressbook-web-tests/chromedriver.exe
+/addressbook-web-tests/geckodriver.exe
+/addressbook-web-tests/IEDriverServer.exe
