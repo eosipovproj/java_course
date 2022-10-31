@@ -29,7 +29,7 @@ public class ApplicationManager {
         } else if (browser.equals(Browser.FIREFOX.browserName())) {
             wd = new FirefoxDriver(new FirefoxOptions().setBinary("C:/Program Files/Mozilla Firefox/firefox.exe"));
         }
-        wd.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
+        wd.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         groupsHelper = new GroupsHelper(wd);
         navigationHelper = new NavigationHelper(wd);
         contactHelper = new ContactHelper(wd);
