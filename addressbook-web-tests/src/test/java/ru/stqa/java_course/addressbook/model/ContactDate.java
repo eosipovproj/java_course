@@ -18,6 +18,7 @@ public class ContactDate {
         this.group = group;
     }
 
+
     public String getFirstname() {
         return firstname;
     }
