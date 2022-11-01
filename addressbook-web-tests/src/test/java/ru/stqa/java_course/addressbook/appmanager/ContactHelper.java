@@ -25,6 +25,7 @@ public class ContactHelper extends BaseHelper{
         } else {
             Assert.assertFalse(isElementPresent(By.name("new_group")));
         }
+
     }
 
     public void initContactCreation() {
@@ -54,13 +55,12 @@ public class ContactHelper extends BaseHelper{
         click(By.linkText("home page"));
     }
 
-    public void createContact(ContactDate contact, boolean b) {
+    public void createContact(ContactDate contact) {
         initContactCreation();
-        fillContactForm(contact, b);
+        fillContactForm(contact, true);
         submitContactCreation();
         returnHomePage();
     }
-
     public boolean isThereAContact() {
         return isElementPresent(By.name("selected[]"));
     }
