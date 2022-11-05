@@ -20,12 +20,15 @@ public class ContactHelper extends BaseHelper{
         type(By.name("address"), contactDate.getAddress());
         type(By.name("mobile"), contactDate.getMobile());
         type(By.name("email"), contactDate.getEmail());
-        if (creation) {
-            new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactDate.getGroup());
-        } else {
+//        if (creation) {
+//            new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactDate.getGroup());
+//        } else {
+//            Assert.assertFalse(isElementPresent(By.name("new_group")));
+//        }
+        if (creation){
+            new Select(wd.findElement(By.name("new_group"))).selectByIndex(0);
+        } else
             Assert.assertFalse(isElementPresent(By.name("new_group")));
-        }
-
     }
 
     public void initContactCreation() {
