@@ -26,7 +26,7 @@ public class ContactHelper extends BaseHelper{
 //            Assert.assertFalse(isElementPresent(By.name("new_group")));
 //        }
         if (creation){
-            new Select(wd.findElement(By.name("new_group"))).selectByIndex(0);
+            new Select(wd.findElement(By.name("new_group"))).selectByIndex(1);
         } else
             Assert.assertFalse(isElementPresent(By.name("new_group")));
     }
