@@ -2,9 +2,13 @@ package ru.stqa.java_course.addressbook.appmanager;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.stqa.java_course.addressbook.model.ContactDate;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ContactHelper extends BaseHelper{
     public ContactHelper(WebDriver wd) {
@@ -35,8 +39,8 @@ public class ContactHelper extends BaseHelper{
         click(By.linkText("add new"));
     }
 
-    public void selectContact() {
-        click(By.name("selected[]"));
+    public void selectContact(int index) {
+        wd.findElements(By.name("selected[]")).get(index).click();
     }
 
     public void deleteContact() {
@@ -48,7 +52,7 @@ public class ContactHelper extends BaseHelper{
     }
 
     public void initContactModification() {
-        click(By.xpath("//img[@alt='Edit']"));
+        click(By.xpath("//table[@id='maintable']/tbody/tr[5]/td[8]/a/img"));
     }
 
     public void submitContactModification() {
@@ -66,5 +70,19 @@ public class ContactHelper extends BaseHelper{
     }
     public boolean isThereAContact() {
         return isElementPresent(By.name("selected[]"));
+    }
+
+    public List<ContactDate> getContactList() {
+        List<ContactDate> contacts = new ArrayList<ContactDate>();
+        List<WebElement> elements = wd.findElements(By.name("entry"));
+        for (WebElement element : elements){
+            int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
+            List<WebElement> cells = element.findElements(By.tagName("td"));
+            String firstname = cells.get(2).getText();
+            String lastname = cells.get(1).getText();
+            ContactDate contact = new ContactDate(id, firstname, lastname, null, null, null);
+            contacts.add(contact);
+        }
+        return contacts;
     }
 }
