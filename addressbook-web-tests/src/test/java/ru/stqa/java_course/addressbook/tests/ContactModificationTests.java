@@ -23,7 +23,7 @@ public class ContactModificationTests extends TestBase {
         }
         List<ContactDate> before = app.getContactHelper().getContactList();
         app.getContactHelper().selectContact(before.size() - 1);
-        app.getContactHelper().initContactModification();
+        app.getContactHelper().initContactModification(before.size() - 1);
         ContactDate contact = new ContactDate(before.get(before.size() - 1).getId(),"Evgeniy-t",
                 "Osipov-t", "Saint-Petersburg", "+781", "tet@test.ru");
         app.getContactHelper().fillContactForm(contact, false);
