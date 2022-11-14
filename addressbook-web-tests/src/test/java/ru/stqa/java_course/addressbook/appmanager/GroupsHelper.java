@@ -74,7 +74,7 @@ public class GroupsHelper extends BaseHelper{
     public int getGroupCount() {
         return wd.findElements(By.name("selected[]")).size();
     }
-    
+
     public Set<GroupDate> all() {
         Set<GroupDate> groups = new HashSet<GroupDate>();
         List<WebElement> elements = wd.findElements(By.cssSelector("span.group"));
