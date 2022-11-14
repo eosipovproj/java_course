@@ -1,6 +1,7 @@
 package ru.stqa.java_course.addressbook.tests;
 
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.java_course.addressbook.model.ContactDate;
 import ru.stqa.java_course.addressbook.model.GroupDate;
@@ -10,28 +11,29 @@ import java.util.List;
 
 public class ContactModificationTests extends TestBase {
 
-    @Test(enabled = false)
-    public void testContactModification() {
-        if(! app.getContactHelper().isThereAContact()) {
-            app.getNavigationHelper().goToGroupPage();
-            if (! app.getGroupsHelper().isThereAGroup()){
-                app.getGroupsHelper().createGroup(new GroupDate("test1", "test header", "test comment"));
+    @BeforeMethod
+    public void ensurePrecondition() {
+        if (app.contact().list().size() == 0) {
+            app.goTo().groupPage();
+            if (app.group().list().size() == 0) {
+                app.group().create(new GroupDate("test1", "test header", "test comment"));
             }
-            app.getNavigationHelper().goToHomePage();
-            app.getContactHelper().createContact(new ContactDate("Evgeniy",
+            app.goTo().homePage();
+            app.contact().create(new ContactDate("Evgeniy",
                     "Osipov", "Saint-Petersburg", "+78112341123", "test@test.ru"));
         }
-        List<ContactDate> before = app.getContactHelper().getContactList();
-        app.getContactHelper().selectContact(before.size() - 1);
-        app.getContactHelper().initContactModification(before.size() - 1);
-        ContactDate contact = new ContactDate(before.get(before.size() - 1).getId(),"Evgeniy-t",
+    }
+    @Test()
+    public void testContactModification() {
+        List<ContactDate> before = app.contact().list();
+        int index = before.size() - 1;
+        ContactDate contact = new ContactDate(before.get(index).getId(),"Evgeniy-t",
                 "Osipov-t", "Saint-Petersburg", "+781", "tet@test.ru");
-        app.getContactHelper().fillContactForm(contact, false);
-        app.getContactHelper().submitContactModification();
-        app.getNavigationHelper().goToHomePage();
-        List<ContactDate> after = app.getContactHelper().getContactList();
+        app.contact().modify(index, contact);
+        app.goTo().homePage();
+        List<ContactDate> after = app.contact().list();
 
-        before.remove(before.size() - 1);
+        before.remove(index);
         before.add(contact);
         Comparator<? super ContactDate> byId = (c1, c2) -> Integer.compare(c1.getId(), c2.getId());
         before.sort(byId);

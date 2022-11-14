@@ -1,6 +1,7 @@
 package ru.stqa.java_course.addressbook.tests;
 
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.java_course.addressbook.model.ContactDate;
 import ru.stqa.java_course.addressbook.model.GroupDate;
@@ -10,20 +11,21 @@ import java.util.List;
 
 
 public class ContactCreationTests extends TestBase {
-
-
-  @Test(enabled = false)
-  public void testContactCreation() throws Exception {
-    app.getNavigationHelper().goToGroupPage();
-    if (! app.getGroupsHelper().isThereAGroup()){
-      app.getGroupsHelper().createGroup(new GroupDate("test1", "test header", "test comment"));
+  @BeforeMethod
+    public void ensurePrecondition() {
+    app.goTo().groupPage();
+    if (app.group().list().size() == 0) {
+      app.group().create(new GroupDate("test1", "test header", "test comment"));
     }
-    app.getNavigationHelper().goToHomePage();
-    List<ContactDate> before = app.getContactHelper().getContactList();
+  }
+  @Test
+  public void testContactCreation() throws Exception {
+    app.goTo().homePage();
+    List<ContactDate> before = app.contact().list();
     ContactDate contact = new ContactDate("Evgeniy", "Osipov", "Saint-Petersburg",
             "+78112341123", "test@test.ru");
-    app.getContactHelper().createContact(contact);
-    List<ContactDate> after = app.getContactHelper().getContactList();
+    app.contact().create(contact);
+    List<ContactDate> after = app.contact().list();
 
 
     before.add(contact);
