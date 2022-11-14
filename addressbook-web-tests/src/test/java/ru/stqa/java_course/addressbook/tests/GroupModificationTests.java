@@ -14,15 +14,15 @@ public class GroupModificationTests extends TestBase {
     public void ensurePrecondition () {
         app.goTo().groupPage();
         if (app.group().list().size() == 0){
-            app.group().create(new GroupDate("test1", "test header", "test comment"));
+            app.group().create(new GroupDate().withGroupname("test1").withHeader("test header").withFooter("test comment"));
         }
     }
     @Test
     public void testGroupModification () {
         List<GroupDate> before = app.group().list();
         int index = before.size() - 1;
-        GroupDate group = new GroupDate(before.get(index).getId(), "test1-ed",
-                "test header-Edited", "test comment-Edited");
+        GroupDate group = new GroupDate().withId(before.get(index).getId()).withGroupname( "test1-ed").
+                withHeader("test header-Edited").withFooter( "test comment-Edited");
         app.group().modify(index, group);
         List<GroupDate> after = app.group().list();
         Assert.assertEquals(after.size(), before.size());

@@ -1,28 +1,29 @@
 package ru.stqa.java_course.addressbook.model;
 
 public class GroupDate {
-    private int id;
-    private final String groupname;
-    private final String header;
-    private final String footer;
+    private int id = Integer.MAX_VALUE;
+    private String groupname;
+    private String header;
+    private String footer;
 
-    public GroupDate(int id, String name, String header, String footer) {
-        this.id = id;
-        this.groupname = name;
-        this.header = header;
-        this.footer = footer;
+    public int getId(){
+        return id;
     }
-
-    @Override
-    public int hashCode() {
-        return groupname != null ? groupname.hashCode() : 0;
+    public GroupDate withId(int id) {
+        this.id = this.id;
+        return this;
     }
-
-    public GroupDate(String name, String header, String footer) {
-        this.id = Integer.MAX_VALUE;
-        this.groupname = name;
+    public GroupDate withGroupname(String groupname) {
+        this.groupname = groupname;
+        return this;
+    }
+    public GroupDate withHeader(String header) {
         this.header = header;
+        return this;
+    }
+    public GroupDate withFooter(String footer) {
         this.footer = footer;
+        return this;
     }
 
     public String getGroupname() {
@@ -35,10 +36,6 @@ public class GroupDate {
 
     public String getFooter() {
         return footer;
-    }
-
-    public int getId() {
-        return id;
     }
 
     public void setId(int id) {
@@ -61,4 +58,9 @@ public class GroupDate {
 
         return groupname != null ? groupname.equals(groupDate.groupname) : groupDate.groupname == null;
     }
+    @Override
+    public int hashCode() {
+        return groupname != null ? groupname.hashCode() : 0;
+    }
+
 }

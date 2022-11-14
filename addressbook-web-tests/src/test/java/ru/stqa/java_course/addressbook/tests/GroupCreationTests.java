@@ -13,7 +13,7 @@ public class GroupCreationTests extends TestBase{
   public void testGroupCreation() throws Exception {
     app.goTo().groupPage();
     List<GroupDate> before = app.group().list();
-    GroupDate group = new GroupDate("test2", "test header", "test comment");
+    GroupDate group = new GroupDate().withGroupname("test2").withHeader("test header").withFooter("test comment");
     app.group().create(group);
     List<GroupDate> after = app.group().list();
     Assert.assertEquals(after.size(), before.size() + 1);
