@@ -10,7 +10,7 @@ public class GroupDate {
         return id;
     }
     public GroupDate withId(int id) {
-        this.id = this.id;
+        this.id = id;
         return this;
     }
     public GroupDate withGroupname(String groupname) {
