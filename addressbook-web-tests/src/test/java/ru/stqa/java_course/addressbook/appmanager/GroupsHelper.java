@@ -5,8 +5,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import ru.stqa.java_course.addressbook.model.GroupDate;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class GroupsHelper extends BaseHelper{
 
@@ -36,10 +37,6 @@ public class GroupsHelper extends BaseHelper{
         click(By.name("delete"));
     }
 
-    public void selectGroup(int index) {
-        wd.findElements(By.name("selected[]")).get(index).click();
-    }
-
     public void initGroupModification() {
         click(By.name("edit"));
     }
@@ -54,27 +51,32 @@ public class GroupsHelper extends BaseHelper{
         submitGroupCreation();
         returnToGroupPage();
     }
-    public void modify(int index, GroupDate group) {
-        selectGroup(index);
+    public void modify(GroupDate group) {
+        selectGroupById(group.getId());
         initGroupModification();
         fillGroupForm(group);
         submitGroupModification();
         returnToGroupPage();
     }
-    public void delete(int index) {
-        selectGroup(index);
+    public void delete(GroupDate group) {
+        selectGroupById(group.getId());
         deleteSelectedGroups();
         returnToGroupPage();
     }
+
+    private void selectGroupById(int id) {
+        wd.findElement(By.cssSelector("input[value='" + id + "']")).click();
+    }
+
     public boolean isThereAGroup() {
         return isElementPresent(By.name("selected[]"));
     }
     public int getGroupCount() {
         return wd.findElements(By.name("selected[]")).size();
     }
-
-    public List<GroupDate> list() {
-        List<GroupDate> groups = new ArrayList<GroupDate>();
+    
+    public Set<GroupDate> all() {
+        Set<GroupDate> groups = new HashSet<GroupDate>();
         List<WebElement> elements = wd.findElements(By.cssSelector("span.group"));
         for (WebElement element : elements){
             String name = element.getText();
@@ -83,4 +85,6 @@ public class GroupsHelper extends BaseHelper{
         }
         return groups;
     }
+
+
 }

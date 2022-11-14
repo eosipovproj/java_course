@@ -4,24 +4,21 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import ru.stqa.java_course.addressbook.model.GroupDate;
 
-import java.util.Comparator;
-import java.util.List;
+import java.util.Set;
 
 public class GroupCreationTests extends TestBase{
 
   @Test
   public void testGroupCreation() throws Exception {
     app.goTo().groupPage();
-    List<GroupDate> before = app.group().list();
+    Set<GroupDate> before = app.group().all();
     GroupDate group = new GroupDate().withGroupname("test2").withHeader("test header").withFooter("test comment");
     app.group().create(group);
-    List<GroupDate> after = app.group().list();
+    Set<GroupDate> after = app.group().all();
     Assert.assertEquals(after.size(), before.size() + 1);
 
     before.add(group);
-    Comparator<? super GroupDate> byId = (g1, g2) -> Integer.compare(g1.getId(), g2.getId());
-    before.sort(byId);
-    after.sort(byId);
+    group.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt());
     Assert.assertEquals(before, after);
   }
 }
