@@ -1,34 +1,42 @@
 package ru.stqa.java_course.addressbook.model;
 
 public class ContactDate {
-    private int id;
-    private final String firstname;
-    private final String lastname;
-    private final String address;
-    private final String mobile;
-    private final String email;
-//    private String group;
+    private int id = Integer.MAX_VALUE;
+    private String firstname;
+    private String lastname;
+    private String address;
+    private String mobile;
+    private String email;
 
-    public ContactDate(int id, String firstname, String lastname, String address, String mobile,
-                       String email) {
+    public ContactDate withId(int id) {
         this.id = id;
-        this.firstname = firstname;
-        this.lastname = lastname;
-        this.address = address;
-        this.mobile = mobile;
-        this.email = email;
-//        this.group = group;
-    }
-    public ContactDate(String firstname, String lastname, String address, String mobile,
-                       String email) {
-        this.id = Integer.MAX_VALUE;
-        this.firstname = firstname;
-        this.lastname = lastname;
-        this.address = address;
-        this.mobile = mobile;
-        this.email = email;
+        return this;
     }
 
+    public ContactDate withFirstname(String firstname) {
+        this.firstname = firstname;
+        return this;
+    }
+
+    public ContactDate withLastname(String lastname) {
+        this.lastname = lastname;
+        return this;
+    }
+
+    public ContactDate withAddress(String address) {
+        this.address = address;
+        return this;
+    }
+
+    public ContactDate withMobile(String mobile) {
+        this.mobile = mobile;
+        return this;
+    }
+
+    public ContactDate withEmail(String email) {
+        this.email = email;
+        return this;
+    }
     public String getFirstname() {
         return firstname;
     }

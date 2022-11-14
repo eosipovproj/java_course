@@ -17,11 +17,11 @@ public class ContactDeletionTests extends TestBase {
         }
         app.goTo().homePage();
         if( app.contact().list().size() == 0) {
-            app.contact().create(new ContactDate("Evgeniy", "Osipov", "Saint-Petersburg",
-                    "+78112341123", "test@test.ru"));
+            app.contact().create(new ContactDate().withFirstname("Evgeniy").withLastname("Osipov")
+                    .withAddress("Saint-Petersburg").withMobile("+78112341123").withEmail("test@test.ru"));
         }
     }
-    @Test(enabled = false)
+    @Test
     public void testContactDeletion () {
         List<ContactDate> before = app.contact().list();
         int index = before.size() - 1;

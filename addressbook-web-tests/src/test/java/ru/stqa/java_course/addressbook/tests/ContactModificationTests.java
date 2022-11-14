@@ -19,16 +19,16 @@ public class ContactModificationTests extends TestBase {
                 app.group().create(new GroupDate().withGroupname("test2").withHeader("test header").withFooter("test comment"));
             }
             app.goTo().homePage();
-            app.contact().create(new ContactDate("Evgeniy",
-                    "Osipov", "Saint-Petersburg", "+78112341123", "test@test.ru"));
+            app.contact().create(new ContactDate().withFirstname("Evgeniy").withLastname("Osipov")
+                    .withAddress("Saint-Petersburg").withMobile("+78112341123").withEmail("test@test.ru"));
         }
     }
-    @Test()
+    @Test
     public void testContactModification() {
         List<ContactDate> before = app.contact().list();
         int index = before.size() - 1;
-        ContactDate contact = new ContactDate(before.get(index).getId(),"Evgeniy-t",
-                "Osipov-t", "Saint-Petersburg", "+781", "tet@test.ru");
+        ContactDate contact = new ContactDate().withId(before.get(index).getId()).withFirstname("Evgeniy").withLastname("Osipov")
+                .withAddress("Saint-Petersburg").withMobile("+78112341123").withEmail("test@test.ru");
         app.contact().modify(index, contact);
         app.goTo().homePage();
         List<ContactDate> after = app.contact().list();

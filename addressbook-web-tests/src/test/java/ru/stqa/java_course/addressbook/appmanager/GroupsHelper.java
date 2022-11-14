@@ -79,8 +79,7 @@ public class GroupsHelper extends BaseHelper{
         for (WebElement element : elements){
             String name = element.getText();
             int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
-            GroupDate group = new GroupDate().withId(id).withGroupname(name);
-            groups.add(group);
+            groups.add(new GroupDate().withId(id).withGroupname(name));
         }
         return groups;
     }
