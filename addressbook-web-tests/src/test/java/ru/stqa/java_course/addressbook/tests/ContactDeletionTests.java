@@ -1,12 +1,14 @@
 package ru.stqa.java_course.addressbook.tests;
 
-import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.java_course.addressbook.model.ContactDate;
+import ru.stqa.java_course.addressbook.model.Contacts;
 import ru.stqa.java_course.addressbook.model.GroupDate;
 
-import java.util.List;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.testng.Assert.assertEquals;
 
 public class ContactDeletionTests extends TestBase {
     @BeforeMethod
@@ -16,19 +18,21 @@ public class ContactDeletionTests extends TestBase {
             app.group().create(new GroupDate().withGroupname("test2").withHeader("test header").withFooter("test comment"));
         }
         app.goTo().homePage();
-        if( app.contact().list().size() == 0) {
+        if( app.contact().all().size() == 0) {
             app.contact().create(new ContactDate().withFirstname("Evgeniy").withLastname("Osipov")
                     .withAddress("Saint-Petersburg").withMobile("+78112341123").withEmail("test@test.ru"));
         }
     }
     @Test
     public void testContactDeletion () {
-        List<ContactDate> before = app.contact().list();
-        int index = before.size() - 1;
-        app.contact().delete(index);
-        List<ContactDate> after = app.contact().list();
+        Contacts before = app.contact().all();
+        ContactDate deletedContact = before.iterator().next();
+        app.contact().delete(deletedContact);
+        Contacts after = app.contact().all();
 
-        before.remove(index);
-        Assert.assertEquals(before, after);
+//        before.remove(deletedContact);
+//        Assert.assertEquals(before, after);
+        assertEquals(after.size(), before.size() - 1);
+        assertThat(after, equalTo(before.without(deletedContact)));
     }
 }

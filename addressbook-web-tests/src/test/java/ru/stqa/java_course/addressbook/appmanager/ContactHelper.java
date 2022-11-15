@@ -6,8 +6,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.stqa.java_course.addressbook.model.ContactDate;
+import ru.stqa.java_course.addressbook.model.Contacts;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ContactHelper extends BaseHelper{
@@ -39,8 +39,8 @@ public class ContactHelper extends BaseHelper{
         click(By.linkText("add new"));
     }
 
-    public void selectContact(int index) {
-        wd.findElements(By.name("selected[]")).get(index).click();
+    public void selectContact(int id)  {
+        wd.findElement(By.cssSelector("input[value='" + id + "']")).click();
     }
 
     public void deleteContact() {
@@ -51,8 +51,12 @@ public class ContactHelper extends BaseHelper{
         wd.switchTo().alert().accept();
     }
 
-    public void initContactModification(int index) {
-        wd.findElements(By.xpath("//img[@alt='Edit']")).get(index).click();
+//    public void initContactModification(int index) {
+//        wd.findElements(By.xpath("//img[@alt='Edit']")).get(index).click();
+//    }
+    public void initContactModification(int id) {
+        wd.findElement(By.cssSelector("input[value='" + id + "']")).
+                findElement(By.xpath("//img[@alt='Edit']")).click();
     }
 
     public void submitContactModification() {
@@ -68,14 +72,14 @@ public class ContactHelper extends BaseHelper{
         submitContactCreation();
         returnHomePage();
     }
-    public void modify(int index, ContactDate contact) {
-        selectContact(index);
-        initContactModification(index);
+    public void modify(ContactDate contact) {
+        selectContact(contact.getId());
+        initContactModification(contact.getId());
         fillContactForm(contact, false);
         submitContactModification();
     }
-    public void delete(int index) {
-        selectContact(index);
+    public void delete(ContactDate contact) {
+        selectContact(contact.getId());
         deleteContact();
         closeAllert();
     }
@@ -83,8 +87,8 @@ public class ContactHelper extends BaseHelper{
         return isElementPresent(By.name("selected[]"));
     }
 
-    public List<ContactDate> list() {
-        List<ContactDate> contacts = new ArrayList<ContactDate>();
+    public Contacts all() {
+        Contacts contacts = new Contacts();
         List<WebElement> elements = wd.findElements(By.name("entry"));
         for (WebElement element : elements){
             int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
