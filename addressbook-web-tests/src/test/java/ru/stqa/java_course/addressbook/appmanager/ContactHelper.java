@@ -24,11 +24,7 @@ public class ContactHelper extends BaseHelper{
         type(By.name("address"), contactDate.getAddress());
         type(By.name("mobile"), contactDate.getMobile());
         type(By.name("email"), contactDate.getEmail());
-//        if (creation) {
-//            new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactDate.getGroup());
-//        } else {
-//            Assert.assertFalse(isElementPresent(By.name("new_group")));
-//        }
+
         if (creation){
             new Select(wd.findElement(By.name("new_group"))).selectByIndex(1);
         } else
@@ -85,6 +81,9 @@ public class ContactHelper extends BaseHelper{
     }
     public boolean isThereAContact() {
         return isElementPresent(By.name("selected[]"));
+    }
+    public int count() {
+        return wd.findElements(By.name("selected[]")).size();
     }
 
     private Contacts contactCache = null;
