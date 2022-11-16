@@ -28,11 +28,7 @@ public class ContactCreationTests extends TestBase {
     Contacts after = app.contact().all();
     assertThat(after.size(), Matchers.equalTo( before.size() + 1));
 
-//    before.add(contact);
-//    Comparator<? super ContactDate> byId = (c1, c2) -> Integer.compare(c1.getId(), c2.getId());
-//    before.sort(byId);
-//    after.sort(byId);
-//    Assert.assertEquals(before, after);
+
     assertThat(after, Matchers.equalTo(before.withAdded(contact.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
   }
 }

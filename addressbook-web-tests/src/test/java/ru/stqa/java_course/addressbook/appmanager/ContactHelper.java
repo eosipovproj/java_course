@@ -51,12 +51,9 @@ public class ContactHelper extends BaseHelper{
         wd.switchTo().alert().accept();
     }
 
-//    public void initContactModification(int index) {
-//        wd.findElements(By.xpath("//img[@alt='Edit']")).get(index).click();
-//    }
     public void initContactModification(int id) {
         wd.findElement(By.cssSelector("input[value='" + id + "']")).
-                findElement(By.xpath("//img[@alt='Edit']")).click();
+                findElement(By.xpath("../..//img[@alt='Edit']")).click();
     }
 
     public void submitContactModification() {

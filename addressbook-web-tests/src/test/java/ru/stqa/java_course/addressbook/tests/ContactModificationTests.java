@@ -34,12 +34,6 @@ public class ContactModificationTests extends TestBase {
         app.goTo().homePage();
         Contacts after = app.contact().all();
 
-//        before.remove(index);
-//        before.add(contact);
-//        Comparator<? super ContactDate> byId = (c1, c2) -> Integer.compare(c1.getId(), c2.getId());
-//        before.sort(byId);
-//        after.sort(byId);
-//        Assert.assertEquals(before, after);
         assertEquals(after.size(), before.size());
         assertThat(after, equalTo(before.without(mofifiedContact).withAdded(contact)));
     }
