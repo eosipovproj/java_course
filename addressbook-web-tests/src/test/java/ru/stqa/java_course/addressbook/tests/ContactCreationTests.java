@@ -1,6 +1,5 @@
 package ru.stqa.java_course.addressbook.tests;
 
-import org.hamcrest.Matchers;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.java_course.addressbook.model.ContactDate;
@@ -8,6 +7,7 @@ import ru.stqa.java_course.addressbook.model.Contacts;
 import ru.stqa.java_course.addressbook.model.GroupDate;
 
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.equalTo;
 
 
 public class ContactCreationTests extends TestBase {
@@ -26,9 +26,9 @@ public class ContactCreationTests extends TestBase {
             .withAddress("Saint-Petersburg").withMobile("+78112341123").withEmail("test@test.ru");
     app.contact().create(contact);
     Contacts after = app.contact().all();
-    assertThat(after.size(), Matchers.equalTo( before.size() + 1));
+    assertThat(after.size(), equalTo( before.size() + 1));
 
 
-    assertThat(after, Matchers.equalTo(before.withAdded(contact.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
+    assertThat(after, equalTo(before.withAdded(contact.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
   }
 }
