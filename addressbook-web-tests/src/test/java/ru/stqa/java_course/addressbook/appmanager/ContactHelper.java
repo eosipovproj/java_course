@@ -94,12 +94,32 @@ public class ContactHelper extends BaseHelper{
         contactCache = new Contacts();
         List<WebElement> elements = wd.findElements(By.name("entry"));
         for (WebElement element : elements){
-            int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
             List<WebElement> cells = element.findElements(By.tagName("td"));
-            String firstname = cells.get(2).getText();
+            int id = Integer.parseInt(cells.get(0).findElement(By.tagName("input")).getAttribute("value"));
             String lastname = cells.get(1).getText();
-            contactCache.add(new ContactDate().withId(id).withFirstname(firstname).withLastname(lastname));
+            String firstname = cells.get(2).getText();
+            String allPhones = cells.get(5).getText();
+            contactCache.add(new ContactDate().withId(id).withFirstname(firstname).withLastname(lastname)
+                    .withAllPhones(allPhones));
         }
         return new Contacts(contactCache);
+    }
+    public ContactDate infoFromEditForm (ContactDate contact) {
+        initContactModificationById(contact.getId());
+        String firstname = wd.findElement(By.name("firstname")).getAttribute("value");
+        String lastname = wd.findElement(By.name("lastname")).getAttribute("value");
+        String home = wd.findElement(By.name("home")).getAttribute("value");
+        String mobile = wd.findElement(By.name("mobile")).getAttribute("value");
+        String work = wd.findElement(By.name("work")).getAttribute("value");
+        wd.navigate().back();
+        return new ContactDate().withId(contact.getId()).withFirstname(firstname).withLastname(lastname).withHomePhone(home)
+                .withWorkPhone(work).withMobile(mobile);
+    }
+
+    private void initContactModificationById(int id) {
+        WebElement checkbox = wd.findElement(By.cssSelector(String.format("input[value='%s']", id)));
+        WebElement row = checkbox.findElement(By.xpath("./../.."));
+        List<WebElement> cells = row.findElements(By.tagName("td"));
+        cells.get(7).findElement(By.tagName("a")).click();
     }
 }

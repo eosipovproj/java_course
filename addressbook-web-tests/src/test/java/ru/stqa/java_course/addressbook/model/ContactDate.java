@@ -7,6 +7,9 @@ public class ContactDate {
     private String address;
     private String mobile;
     private String email;
+    private String workPhone;
+    private String homePhone;
+    private String allPhones;
 
     public ContactDate withId(int id) {
         this.id = id;
@@ -30,6 +33,18 @@ public class ContactDate {
 
     public ContactDate withMobile(String mobile) {
         this.mobile = mobile;
+        return this;
+    }
+    public ContactDate withWorkPhone(String workPhone) {
+        this.workPhone = workPhone;
+        return this;
+    }
+    public ContactDate withHomePhone(String homePhone) {
+        this.homePhone = homePhone;
+        return this;
+    }
+    public ContactDate withAllPhones(String allPhones) {
+        this.allPhones = allPhones;
         return this;
     }
 
@@ -58,6 +73,15 @@ public class ContactDate {
     }
     public int getId() {
             return id;
+    }
+    public String getWorkPhone() {
+        return workPhone;
+    }
+    public String getHomePhone() {
+        return homePhone;
+    }
+    public String getAllPhones() {
+        return allPhones;
     }
 
     @Override
@@ -88,6 +112,7 @@ public class ContactDate {
         result = 31 * result + (lastname != null ? lastname.hashCode() : 0);
         return result;
     }
+
 
 //    public int getGroup() {
 //        return ; }
