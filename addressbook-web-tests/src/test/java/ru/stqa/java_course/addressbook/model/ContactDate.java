@@ -10,7 +10,9 @@ public class ContactDate {
     private String workPhone;
     private String homePhone;
     private String allPhones;
-
+    private String email2;
+    private String email3;
+    private String allEmails;
     public ContactDate withId(int id) {
         this.id = id;
         return this;
@@ -52,22 +54,30 @@ public class ContactDate {
         this.email = email;
         return this;
     }
+    public ContactDate withEmail2(String email2) {
+        this.email2= email2;
+        return this;
+    }
+    public ContactDate withEmail3(String email3) {
+        this.email3 = email3;
+        return this;
+    }
+    public ContactDate withAllEmails(String allEmails) {
+        this.allEmails = allEmails;
+        return this;
+    }
     public String getFirstname() {
         return firstname;
     }
-
     public String getLastname() {
         return lastname;
     }
-
     public String getAddress() {
         return address;
     }
-
     public String getMobile() {
         return mobile;
     }
-
     public String getEmail() {
         return email;
     }
@@ -82,6 +92,15 @@ public class ContactDate {
     }
     public String getAllPhones() {
         return allPhones;
+    }
+    public String getEmail2() {
+        return email2;
+    }
+    public String getEmail3() {
+        return email3;
+    }
+    public String getAllEmails() {
+        return allEmails;
     }
 
     @Override
@@ -112,9 +131,5 @@ public class ContactDate {
         result = 31 * result + (lastname != null ? lastname.hashCode() : 0);
         return result;
     }
-
-
-//    public int getGroup() {
-//        return ; }
 
 }
