@@ -9,6 +9,9 @@ public class ContactDate {
     private String email;
     private String workPhone;
     private String homePhone;
+
+    private String secondaryHomePhone;
+
     private String allPhones;
     private String email2;
     private String email3;
@@ -43,6 +46,10 @@ public class ContactDate {
     }
     public ContactDate withHomePhone(String homePhone) {
         this.homePhone = homePhone;
+        return this;
+    }
+    public ContactDate withSecondaryHomePhone(String secondaryHomePhone) {
+        this.secondaryHomePhone = secondaryHomePhone;
         return this;
     }
     public ContactDate withAllPhones(String allPhones) {
@@ -89,6 +96,9 @@ public class ContactDate {
     }
     public String getHomePhone() {
         return homePhone;
+    }
+    public String getSecondaryHomePhone() {
+        return secondaryHomePhone;
     }
     public String getAllPhones() {
         return allPhones;
