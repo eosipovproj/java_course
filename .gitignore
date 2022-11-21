@@ -17,3 +17,5 @@ out/
 /addressbook-web-tests/chromedriver.exe
 /addressbook-web-tests/geckodriver.exe
 /addressbook-web-tests/IEDriverServer.exe
+/addressbook-web-tests/src/test/resources/contact.csv
+/addressbook-web-tests/src/test/resources/groups.csv
