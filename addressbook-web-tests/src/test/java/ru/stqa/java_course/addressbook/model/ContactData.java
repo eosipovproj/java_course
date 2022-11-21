@@ -1,6 +1,8 @@
 package ru.stqa.java_course.addressbook.model;
 
-public class ContactDate {
+import java.io.File;
+
+public class ContactData {
     private int id = Integer.MAX_VALUE;
     private String firstname;
     private String lastname;
@@ -16,61 +18,67 @@ public class ContactDate {
     private String email2;
     private String email3;
     private String allEmails;
-    public ContactDate withId(int id) {
+    private File photo;
+
+    public ContactData withId(int id) {
         this.id = id;
         return this;
     }
 
-    public ContactDate withFirstname(String firstname) {
+    public ContactData withFirstname(String firstname) {
         this.firstname = firstname;
         return this;
     }
 
-    public ContactDate withLastname(String lastname) {
+    public ContactData withLastname(String lastname) {
         this.lastname = lastname;
         return this;
     }
 
-    public ContactDate withAddress(String address) {
+    public ContactData withAddress(String address) {
         this.address = address;
         return this;
     }
 
-    public ContactDate withMobile(String mobile) {
+    public ContactData withMobile(String mobile) {
         this.mobile = mobile;
         return this;
     }
-    public ContactDate withWorkPhone(String workPhone) {
+    public ContactData withWorkPhone(String workPhone) {
         this.workPhone = workPhone;
         return this;
     }
-    public ContactDate withHomePhone(String homePhone) {
+    public ContactData withHomePhone(String homePhone) {
         this.homePhone = homePhone;
         return this;
     }
-    public ContactDate withSecondaryHomePhone(String secondaryHomePhone) {
+    public ContactData withSecondaryHomePhone(String secondaryHomePhone) {
         this.secondaryHomePhone = secondaryHomePhone;
         return this;
     }
-    public ContactDate withAllPhones(String allPhones) {
+    public ContactData withAllPhones(String allPhones) {
         this.allPhones = allPhones;
         return this;
     }
 
-    public ContactDate withEmail(String email) {
+    public ContactData withEmail(String email) {
         this.email = email;
         return this;
     }
-    public ContactDate withEmail2(String email2) {
+    public ContactData withEmail2(String email2) {
         this.email2= email2;
         return this;
     }
-    public ContactDate withEmail3(String email3) {
+    public ContactData withEmail3(String email3) {
         this.email3 = email3;
         return this;
     }
-    public ContactDate withAllEmails(String allEmails) {
+    public ContactData withAllEmails(String allEmails) {
         this.allEmails = allEmails;
+        return this;
+    }
+    public ContactData withPhoto(File photo) {
+        this.photo = photo;
         return this;
     }
     public String getFirstname() {
@@ -112,6 +120,9 @@ public class ContactDate {
     public String getAllEmails() {
         return allEmails;
     }
+    public File getPhoto() {
+        return photo;
+    }
 
     @Override
     public String toString() {
@@ -127,7 +138,7 @@ public class ContactDate {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        ContactDate that = (ContactDate) o;
+        ContactData that = (ContactData) o;
 
         if (id != that.id) return false;
         if (firstname != null ? !firstname.equals(that.firstname) : that.firstname != null) return false;

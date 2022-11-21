@@ -1,7 +1,7 @@
 package ru.stqa.java_course.addressbook.tests;
 
 import org.testng.annotations.Test;
-import ru.stqa.java_course.addressbook.model.GroupDate;
+import ru.stqa.java_course.addressbook.model.GroupData;
 import ru.stqa.java_course.addressbook.model.Groups;
 
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -13,7 +13,7 @@ public class GroupCreationTests extends TestBase{
   public void testGroupCreation() throws Exception {
     app.goTo().groupPage();
     Groups before = app.group().all();
-    GroupDate group = new GroupDate().withGroupname("test2").withHeader("test header").withFooter("test comment");
+    GroupData group = new GroupData().withGroupname("test2").withHeader("test header").withFooter("test comment");
     app.group().create(group);
     assertThat(app.group().count(),equalTo( before.size() + 1));
     Groups after = app.group().all();
@@ -24,7 +24,7 @@ public class GroupCreationTests extends TestBase{
   public void testBadGroupCreation() throws Exception {
     app.goTo().groupPage();
     Groups before = app.group().all();
-    GroupDate group = new GroupDate().withGroupname("test2'");
+    GroupData group = new GroupData().withGroupname("test2'");
     app.group().create(group);
     assertThat(app.group().count(),equalTo(before.size()));
     Groups after = app.group().all();
