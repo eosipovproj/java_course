@@ -19,3 +19,5 @@ out/
 /addressbook-web-tests/IEDriverServer.exe
 /addressbook-web-tests/src/test/resources/contact.csv
 /addressbook-web-tests/src/test/resources/groups.csv
+/addressbook-web-tests/src/test/resources/groups.xml
+/addressbook-web-tests/src/test/resources/contact.xml

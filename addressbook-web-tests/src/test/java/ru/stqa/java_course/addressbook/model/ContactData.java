@@ -1,7 +1,9 @@
 package ru.stqa.java_course.addressbook.model;
 
-import java.io.File;
+import com.thoughtworks.xstream.annotations.XStreamAlias;
 
+import java.io.File;
+@XStreamAlias("contact")
 public class ContactData {
     private int id = Integer.MAX_VALUE;
     private String firstname;
@@ -11,9 +13,7 @@ public class ContactData {
     private String email;
     private String workPhone;
     private String homePhone;
-
     private String secondaryHomePhone;
-
     private String allPhones;
     private String email2;
     private String email3;
