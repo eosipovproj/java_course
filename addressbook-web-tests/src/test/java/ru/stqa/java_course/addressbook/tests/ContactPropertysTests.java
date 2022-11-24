@@ -22,7 +22,7 @@ public class ContactPropertysTests extends TestBase {
         }
     }
     @Test
-    public void testContactPhone (){
+    public void testContactPropertys(){
         ContactData contact = app.contact().all().iterator().next();
         ContactData contactInfoFromEditForm = app.contact().infoFromEditForm(contact);
 
@@ -39,8 +39,7 @@ public class ContactPropertysTests extends TestBase {
                 .collect(Collectors.joining("\n"));
     }
     public static String cleanedPhones (String phone){
-        return phone.replaceAll("\\s", "")
-                .replaceAll("[-()]", "");
+        return phone.replaceAll("\\s", "").replaceAll("[-()]", "");
     }
 
     private String mergeEmails(ContactData contact) {

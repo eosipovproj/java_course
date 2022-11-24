@@ -21,3 +21,5 @@ out/
 /addressbook-web-tests/src/test/resources/groups.csv
 /addressbook-web-tests/src/test/resources/groups.xml
 /addressbook-web-tests/src/test/resources/contact.xml
+/addressbook-web-tests/src/test/resources/groups.json
+/addressbook-web-tests/src/test/resources/contact.json
