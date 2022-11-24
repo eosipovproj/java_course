@@ -20,6 +20,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
 public class GroupCreationTests extends TestBase{
+
   @DataProvider
   public Iterator<Object[]> validGroupFromXml() throws IOException {
     try(BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/groups.xml")))){
@@ -60,7 +61,7 @@ public class GroupCreationTests extends TestBase{
 
     assertThat(after, equalTo(before.withAdded(group.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
   }
-  @Test(enabled = false)
+  @Test
   public void testBadGroupCreation() throws Exception {
     app.goTo().groupPage();
     Groups before = app.group().all();
