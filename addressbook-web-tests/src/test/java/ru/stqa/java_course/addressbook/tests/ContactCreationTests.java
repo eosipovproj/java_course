@@ -55,9 +55,9 @@ public class ContactCreationTests extends TestBase {
   }
   @BeforeMethod
     public void ensurePrecondition() {
-    app.goTo().groupPage();
-    if (app.group().all().size() == 0) {
-      app.group().create(new GroupData().withGroupname("test2").withHeader("test header").withFooter("test comment"));
+    if (app.db().groups().size() == 0){
+      app.goTo().groupPage();
+      app.group().create(new GroupData().withGroupname("test1").withHeader("test header").withFooter("test comment"));
     }
   }
   @Test(dataProvider = "validContactFromJson")
@@ -70,8 +70,18 @@ public class ContactCreationTests extends TestBase {
 
     assertThat(after, equalTo(before.withAdded(contact.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
   }
+  @Test(enabled = false,dataProvider = "validContactFromXml")
+  public void testContactCreationDb(ContactData contact) throws Exception {
+    app.goTo().homePage();
+    Contacts before = app.db().contacts();
+    app.contact().create(contact);
+    assertThat(app.contact().count(), equalTo( before.size() + 1));
+    Contacts after = app.db().contacts();
 
-  @Test
+    assertThat(after, equalTo(before.withAdded(contact.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
+  }
+
+  @Test(enabled = false)
   public void testContactCreationWithPhoto() throws Exception {
     app.goTo().homePage();
     Contacts before = app.contact().all();

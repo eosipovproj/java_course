@@ -51,7 +51,7 @@ public class GroupCreationTests extends TestBase{
       return groups.stream().map((g) -> new Object[] {g}).collect(Collectors.toList()).iterator();
     }
   }
-  @Test(dataProvider = "validGroupFromXml")
+  @Test(enabled = false, dataProvider = "validGroupFromXml")
   public void testGroupCreation(GroupData group) throws Exception {
     app.goTo().groupPage();
     Groups before = app.group().all();
@@ -61,7 +61,17 @@ public class GroupCreationTests extends TestBase{
 
     assertThat(after, equalTo(before.withAdded(group.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
   }
-  @Test
+  @Test(dataProvider = "validGroupFromXml")
+  public void testGroupCreationDb(GroupData group) throws Exception {
+    app.goTo().groupPage();
+    Groups before = app.db().groups();
+    app.group().create(group);
+    assertThat(app.group().count(),equalTo( before.size() + 1));
+    Groups after = app.db().groups();
+
+    assertThat(after, equalTo(before.withAdded(group.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
+  }
+  @Test(enabled = false)
   public void testBadGroupCreation() throws Exception {
     app.goTo().groupPage();
     Groups before = app.group().all();
@@ -69,6 +79,17 @@ public class GroupCreationTests extends TestBase{
     app.group().create(group);
     assertThat(app.group().count(),equalTo(before.size()));
     Groups after = app.group().all();
+
+    assertThat(after, equalTo(before));
+  }
+  @Test
+  public void testBadGroupCreationDb() throws Exception {
+    app.goTo().groupPage();
+    Groups before = app.db().groups();
+    GroupData group = new GroupData().withGroupname("test2'");
+    app.group().create(group);
+    assertThat(app.group().count(),equalTo(before.size()));
+    Groups after = app.db().groups();
 
     assertThat(after, equalTo(before));
   }

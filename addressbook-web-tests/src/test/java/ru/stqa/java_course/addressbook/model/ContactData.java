@@ -3,35 +3,63 @@ package ru.stqa.java_course.addressbook.model;
 import com.google.gson.annotations.Expose;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
+import org.hibernate.annotations.Type;
 
+import javax.persistence.*;
 import java.io.File;
+@Entity
+@Table(name = "addressbook")
 @XStreamAlias("contact")
 public class ContactData {
+    @Id
+    @Column(name = "id")
     private int id = Integer.MAX_VALUE;
+    @Column(name = "firstname")
     @Expose
     private String firstname;
+    @Column(name = "lastname")
     @Expose
     private String lastname;
+    @Type(type = "text")
+    @Column(name = "address")
     @Expose
     private String address;
+    @Type(type = "text")
+    @Column(name = "mobile")
     @Expose
     private String mobile;
+    @Type(type = "text")
+    @Column(name = "email")
     @Expose
     private String email;
+    @Type(type = "text")
+    @Column(name = "work")
     @Expose
     private String workPhone;
+    @Type(type = "text")
+    @Column(name = "home")
     @Expose
     private String homePhone;
+    @Type(type = "text")
+    @Column(name = "phone2")
     @Expose
     private String secondaryHomePhone;
+    @Transient
     private String allPhones;
+    @Type(type = "text")
+    @Column(name = "email2")
     @Expose
     private String email2;
+    @Type(type = "text")
+    @Column(name = "email3")
     @Expose
     private String email3;
+    @Transient
     private String allEmails;
+    @Type(type = "text")
+    @Column(name = "photo")
     @XStreamOmitField
-    private File photo;
+    private String photo;
 
     public ContactData withId(int id) {
         this.id = id;
@@ -91,7 +119,7 @@ public class ContactData {
         return this;
     }
     public ContactData withPhoto(File photo) {
-        this.photo = photo;
+        this.photo = photo.getPath();
         return this;
     }
     public String getFirstname() {
@@ -134,7 +162,7 @@ public class ContactData {
         return allEmails;
     }
     public File getPhoto() {
-        return photo;
+        return new File(photo);
     }
 
     @Override
