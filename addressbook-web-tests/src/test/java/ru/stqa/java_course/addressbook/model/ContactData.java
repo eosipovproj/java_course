@@ -7,6 +7,8 @@ import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.io.File;
+import java.util.Objects;
+
 @Entity
 @Table(name = "addressbook")
 @XStreamAlias("contact")
@@ -141,7 +143,7 @@ public class ContactData {
             return id;
     }
     public String getWorkPhone() {
-        return workPhone;
+       return workPhone;
     }
     public String getHomePhone() {
         return homePhone;
@@ -162,15 +164,23 @@ public class ContactData {
         return allEmails;
     }
     public File getPhoto() {
-        return new File(photo);
+        if (photo != null) {
+            return new File(photo);
+        } else {
+            return null;
+        }
     }
 
     @Override
     public String toString() {
-        return "ContactDate{" +
-                "id='" + id + '\'' +
+        return "ContactData{" +
+                "id=" + id +
                 ", firstname='" + firstname + '\'' +
                 ", lastname='" + lastname + '\'' +
+                ", address='" + address + '\'' +
+                ", mobile='" + mobile + '\'' +
+                ", email='" + email + '\'' +
+                ", workPhone='" + workPhone + '\'' +
                 '}';
     }
 
@@ -182,16 +192,32 @@ public class ContactData {
         ContactData that = (ContactData) o;
 
         if (id != that.id) return false;
-        if (firstname != null ? !firstname.equals(that.firstname) : that.firstname != null) return false;
-        return lastname != null ? lastname.equals(that.lastname) : that.lastname == null;
-    }
+        if (firstname != null && that.firstname != null && !Objects.equals(firstname, that.firstname)) { return false; }
+        if (lastname != null && that.lastname != null && !Objects.equals(lastname, that.lastname)) { return false; }
+        if (address != null && that.address != null && !Objects.equals(address, that.address)) { return false; }
+        if (mobile != null && that.mobile != null && !Objects.equals(mobile, that.mobile)) { return false; }
+        if (email != null && that.email != null && !Objects.equals(email, that.email)) { return false; }
+        if (workPhone != null && that.workPhone != null && !Objects.equals(workPhone, that.workPhone)) { return false; }
+        if (homePhone != null && that.homePhone != null && !Objects.equals(homePhone, that.homePhone)) { return false; }
+        if (secondaryHomePhone != null && that.secondaryHomePhone != null
+                && !Objects.equals(secondaryHomePhone, that.secondaryHomePhone)) { return false; }
+        if (email2 != null && that.email2 != null && !Objects.equals(email2, that.email2)) { return false; }
+        if (email3 != null && that.email3 != null && !Objects.equals(email3, that.email3)) { return false; }
+        return true;}
 
     @Override
     public int hashCode() {
         int result = id;
         result = 31 * result + (firstname != null ? firstname.hashCode() : 0);
         result = 31 * result + (lastname != null ? lastname.hashCode() : 0);
+        result = 31 * result + (address != null ? address.hashCode() : 0);
+        result = 31 * result + (mobile != null ? mobile.hashCode() : 0);
+        result = 31 * result + (email != null ? email.hashCode() : 0);
+        result = 31 * result + (workPhone != null ? workPhone.hashCode() : 0);
+        result = 31 * result + (homePhone != null ? homePhone.hashCode() : 0);
+        result = 31 * result + (secondaryHomePhone != null ? secondaryHomePhone.hashCode() : 0);
+        result = 31 * result + (email2 != null ? email2.hashCode() : 0);
+        result = 31 * result + (email3 != null ? email3.hashCode() : 0);
         return result;
     }
-
 }

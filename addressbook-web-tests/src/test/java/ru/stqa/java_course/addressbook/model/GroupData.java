@@ -9,6 +9,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.util.Objects;
 
 @XStreamAlias("group")
 @Entity
@@ -79,12 +80,13 @@ public class GroupData {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        GroupData groupData = (GroupData) o;
+        GroupData that = (GroupData) o;
 
-        if (id != groupData.id) return false;
-        if (groupname != null ? !groupname.equals(groupData.groupname) : groupData.groupname != null) return false;
-        if (header != null ? !header.equals(groupData.header) : groupData.header != null) return false;
-        return footer != null ? footer.equals(groupData.footer) : groupData.footer == null;
+        if (id != that.id) return false;
+        if (groupname != null && that.groupname != null && !Objects.equals(groupname, that.groupname)) { return false; }
+        if (header != null && that.header != null && !Objects.equals(header, that.header)) { return false; }
+        if (footer != null && that.footer != null && !Objects.equals(footer, that.footer)) { return false; }
+        return true;
     }
 
     @Override

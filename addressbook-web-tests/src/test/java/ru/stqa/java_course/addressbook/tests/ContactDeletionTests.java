@@ -12,17 +12,17 @@ import static org.hamcrest.MatcherAssert.assertThat;
 public class ContactDeletionTests extends TestBase {
     @BeforeMethod
     public void ensurePrecondition() {
-        app.goTo().groupPage();
-        if (app.group().all().size() == 0) {
-            app.group().create(new GroupData().withGroupname("test2").withHeader("test header").withFooter("test comment"));
+        if (app.db().groups().size() == 0){
+            app.goTo().groupPage();
+            app.group().create(new GroupData().withGroupname("test1").withHeader("test header").withFooter("test comment"));
         }
-        app.goTo().homePage();
-        if( app.contact().all().size() == 0) {
+        if( app.db().contacts().size() == 0) {
+            app.goTo().homePage();
             app.contact().create(new ContactData().withFirstname("Evgeniy").withLastname("Osipov")
                     .withAddress("Saint-Petersburg").withMobile("+78112341123").withEmail("test@test.ru"));
         }
     }
-    @Test
+    @Test(enabled = false)
     public void testContactDeletion () {
         Contacts before = app.contact().all();
         ContactData deletedContact = before.iterator().next();
@@ -30,6 +30,16 @@ public class ContactDeletionTests extends TestBase {
         assertThat(app.contact().count(), equalTo( before.size() - 1));
         Contacts after = app.contact().all();
         
+        assertThat(after, equalTo(before.without(deletedContact)));
+    }
+    @Test
+    public void testContactDeletionDb () {
+        Contacts before = app.db().contacts();
+        ContactData deletedContact = before.iterator().next();
+        app.contact().delete(deletedContact);
+        assertThat(app.contact().count(), equalTo( before.size() - 1));
+        Contacts after = app.db().contacts();
+
         assertThat(after, equalTo(before.without(deletedContact)));
     }
 }

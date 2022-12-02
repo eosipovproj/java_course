@@ -60,7 +60,7 @@ public class ContactCreationTests extends TestBase {
       app.group().create(new GroupData().withGroupname("test1").withHeader("test header").withFooter("test comment"));
     }
   }
-  @Test(dataProvider = "validContactFromJson")
+  @Test(enabled = false,dataProvider = "validContactFromJson")
   public void testContactCreation(ContactData contact) throws Exception {
     app.goTo().homePage();
     Contacts before = app.contact().all();
@@ -70,7 +70,7 @@ public class ContactCreationTests extends TestBase {
 
     assertThat(after, equalTo(before.withAdded(contact.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
   }
-  @Test(enabled = false,dataProvider = "validContactFromXml")
+  @Test(dataProvider = "validContactFromJson")
   public void testContactCreationDb(ContactData contact) throws Exception {
     app.goTo().homePage();
     Contacts before = app.db().contacts();
@@ -93,5 +93,19 @@ public class ContactCreationTests extends TestBase {
     Contacts after = app.contact().all();
 
     assertThat(after, equalTo(before.withAdded(contact.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
+  }
+  @Test()
+  public void testContactCreationWithPhotoDb() throws Exception {
+    app.goTo().homePage();
+    Contacts before = app.db().contacts();
+    File photo = new File("src/test/resources/test.png");
+    ContactData contact = new ContactData().withFirstname("Evgeniy").withLastname("Osipov")
+            .withAddress("Saint-Petersburg").withMobile("+78112341123").withEmail("test@test.ru").withPhoto(photo);
+    app.contact().create(contact);
+    assertThat(app.contact().count(), equalTo( before.size() + 1));
+    Contacts after = app.db().contacts();
+
+    assertThat(after, equalTo(before.withAdded(contact.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
+
   }
 }
