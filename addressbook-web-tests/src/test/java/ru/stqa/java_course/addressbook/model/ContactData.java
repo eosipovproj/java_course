@@ -203,7 +203,6 @@ public class ContactData {
                 , that.secondaryHomePhone)) { return false; }
         if (email2 != null && that.email2 != null && !Objects.equals(email2, that.email2)) { return false; }
         if (email3 != null && that.email3 != null && !Objects.equals(email3, that.email3)) { return false; }
-        if (photo != null && that.photo  != null && !Objects.equals(photo , that.photo)) { return false; }
         return true;}
 
     @Override
@@ -219,7 +218,6 @@ public class ContactData {
         result = 31 * result + (secondaryHomePhone != null ? secondaryHomePhone.hashCode() : 0);
         result = 31 * result + (email2 != null ? email2.hashCode() : 0);
         result = 31 * result + (email3 != null ? email3.hashCode() : 0);
-        result = 31 * result + (photo != null ? photo.hashCode() : 0);
         return result;
     }
 }
