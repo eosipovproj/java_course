@@ -81,12 +81,13 @@ public class GroupCreationTests extends TestBase{
     Groups after = app.group().all();
 
     assertThat(after, equalTo(before));
+    verifyGroupListInUI();
   }
   @Test
   public void testBadGroupCreationDb() throws Exception {
     app.goTo().groupPage();
     Groups before = app.db().groups();
-    GroupData group = new GroupData().withGroupname("test2");
+    GroupData group = new GroupData().withGroupname("test2  '");
     app.group().create(group);
     assertThat(app.group().count(),equalTo(before.size()));
     Groups after = app.db().groups();
