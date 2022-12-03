@@ -94,7 +94,7 @@ public class ContactCreationTests extends TestBase {
 
     assertThat(after, equalTo(before.withAdded(contact.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
   }
-  @Test()
+  @Test(enabled = false)
   public void testContactCreationWithPhotoDb() throws Exception {
     app.goTo().homePage();
     Contacts before = app.db().contacts();
