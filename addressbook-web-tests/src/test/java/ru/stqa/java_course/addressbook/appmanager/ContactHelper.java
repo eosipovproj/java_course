@@ -7,6 +7,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.stqa.java_course.addressbook.model.ContactData;
 import ru.stqa.java_course.addressbook.model.Contacts;
+import ru.stqa.java_course.addressbook.model.GroupData;
 
 import java.util.List;
 
@@ -139,4 +140,37 @@ public class ContactHelper extends BaseHelper{
         List<WebElement> cells = row.findElements(By.tagName("td"));
         cells.get(7).findElement(By.tagName("a")).click();
     }
+
+    public void addingGroup(ContactData contact, GroupData group) {
+        selectContact(contact.getId());
+        selectGroupToContact(group.getId());
+        confirmSelectedGroup();
+    }
+
+    private void selectGroupToContact(int id) {
+        click(By.name("to_group"));
+        wd.findElement(By.name("to_group")).findElement(By.cssSelector(String.format("option[value='%s']", id))).click();
+
+    }
+
+
+    private void confirmSelectedGroup() {
+        click(By.name("add"));
+    }
+
+    public void deleteGroupFromContact(GroupData group, ContactData contact) {
+        selectGroup(group.getId());
+        selectContact(contact.getId());
+        deleteGroup();
+    }
+
+
+    private void selectGroup(int id) {
+        wd.findElement(By.cssSelector(String.format("option[value='%s']", id))).click();
+    }
+    private void deleteGroup() {
+        click(By.name("remove"));
+    }
+
+
 }

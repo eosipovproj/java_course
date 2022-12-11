@@ -24,3 +24,6 @@ out/
 /addressbook-web-tests/src/test/resources/groups.json
 /addressbook-web-tests/src/test/resources/contact.json
 *.log
+/manatis-tests/chromedriver.exe
+/manatis-tests/geckodriver.exe
+/manatis-tests/IEDriverServer.exe

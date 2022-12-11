@@ -32,18 +32,19 @@ public class HbConnectionTest {
         }
     }
 
-    @Test(enabled = false)
+    @Test
     public void hbConnectionTestGroups(){
         Session session = sessionFactory.openSession();
         session.beginTransaction();
         List<GroupData> result = session.createQuery( "from GroupData" ).list();
         for ( GroupData group : result ) {
             System.out.println(group);
+            System.out.println(group.getContacts());
         }
         session.getTransaction().commit();
         session.close();
     }
-    @Test
+    @Test(enabled = false)
     public void hbConnectionTestContacts(){
         Session session = sessionFactory.openSession();
         session.beginTransaction();
