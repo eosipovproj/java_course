@@ -145,6 +145,7 @@ public class ContactHelper extends BaseHelper{
         selectContact(contact.getId());
         selectGroupToContact(group.getId());
         confirmSelectedGroup();
+        contactCache = null;
     }
 
     private void selectGroupToContact(int id) {
@@ -162,6 +163,7 @@ public class ContactHelper extends BaseHelper{
         selectGroup(group.getId());
         selectContact(contact.getId());
         deleteGroup();
+        contactCache = null;
     }
 
 

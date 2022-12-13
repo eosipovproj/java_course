@@ -8,7 +8,6 @@ import org.hibernate.annotations.Type;
 import javax.persistence.*;
 import java.io.File;
 import java.util.HashSet;
-import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -201,17 +200,18 @@ public class ContactData {
         ContactData that = (ContactData) o;
 
         if (id != that.id) return false;
-        if (firstname != null && that.firstname != null && !Objects.equals(firstname, that.firstname)) { return false; }
-        if (lastname != null && that.lastname != null && !Objects.equals(lastname, that.lastname)) { return false; }
-        if (address != null && that.address != null && !Objects.equals(address, that.address)) { return false; }
-        if (mobile != null && that.mobile != null && !Objects.equals(mobile, that.mobile)) { return false; }
-        if (email != null && that.email != null && !Objects.equals(email, that.email)) { return false; }
-        if (workPhone != null && that.workPhone != null && !Objects.equals(workPhone, that.workPhone)) { return false; }
-        if (homePhone != null && that.homePhone != null && !Objects.equals(homePhone, that.homePhone)) { return false; }
-        if (secondaryHomePhone != null && that.secondaryHomePhone != null && !Objects.equals(secondaryHomePhone
-                , that.secondaryHomePhone)) { return false; }
-        if (email2 != null && that.email2 != null && !Objects.equals(email2, that.email2)) { return false; }
-        return email3 == null || that.email3 == null || Objects.equals(email3, that.email3);
+        if (firstname != null ? !firstname.equals(that.firstname) : that.firstname != null) return false;
+        if (lastname != null ? !lastname.equals(that.lastname) : that.lastname != null) return false;
+        if (address != null ? !address.equals(that.address) : that.address != null) return false;
+        if (mobile != null ? !mobile.equals(that.mobile) : that.mobile != null) return false;
+        if (email != null ? !email.equals(that.email) : that.email != null) return false;
+        if (workPhone != null ? !workPhone.equals(that.workPhone) : that.workPhone != null) return false;
+        if (homePhone != null ? !homePhone.equals(that.homePhone) : that.homePhone != null) return false;
+        if (secondaryHomePhone != null ? !secondaryHomePhone.equals(that.secondaryHomePhone) : that.secondaryHomePhone != null)
+            return false;
+        if (email2 != null ? !email2.equals(that.email2) : that.email2 != null) return false;
+        if (email3 != null ? !email3.equals(that.email3) : that.email3 != null) return false;
+        return groups != null ? groups.equals(that.groups) : that.groups == null;
     }
 
     @Override
@@ -227,6 +227,7 @@ public class ContactData {
         result = 31 * result + (secondaryHomePhone != null ? secondaryHomePhone.hashCode() : 0);
         result = 31 * result + (email2 != null ? email2.hashCode() : 0);
         result = 31 * result + (email3 != null ? email3.hashCode() : 0);
+        result = 31 * result + (groups != null ? groups.hashCode() : 0);
         return result;
     }
 }
