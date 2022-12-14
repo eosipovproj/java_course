@@ -15,11 +15,11 @@ import static org.testng.Assert.assertTrue;
 public class RegistrationTests extends TestBase{
 
     @BeforeMethod
-    public void startMail(){
+    public void startMailServer(){
         app.mail().start();
     }
 
-    @Test(enabled = false)
+    @Test
     public void testRegistration() throws MessagingException, IOException {
         long now = System.currentTimeMillis();
         String email = String.format("test_%s@test.ru", now);
@@ -40,7 +40,7 @@ public class RegistrationTests extends TestBase{
     }
 
     @AfterMethod(alwaysRun = true)
-    public void stopMail(){
+    public void stopMailServer(){
         app.mail().stop();
     }
 
