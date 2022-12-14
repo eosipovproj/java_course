@@ -23,6 +23,8 @@ public class ApplicationManager {
     private MailHelper mailHelper;
     private JamesHelper jamesHelper;
     private DbHelper dbHelper;
+    private UserHelper userHelper;
+    private WebSessionHelper webSessionHelper;
 
     public ApplicationManager(String browser){
         this.browser = browser;
@@ -33,6 +35,7 @@ public class ApplicationManager {
     public void init() throws IOException {
         String target = System.getProperty("target", "local");
         properties.load(new FileReader(new File(String.format("src/test/resources/local.properties", target))));
+        dbHelper = new DbHelper();
     }
         public void stop() {
         if (wd != null){
@@ -48,18 +51,6 @@ public class ApplicationManager {
         return properties.getProperty(key);
     }
 
-    public RegistrationHelper registration() {
-        if( registrationHelper == null) {
-            registrationHelper = new RegistrationHelper(this);
-        }
-        return registrationHelper;
-    }
-    public FtpHelper ftp(){
-        if (ftp == null){
-            ftp = new FtpHelper(this);
-        }
-        return  ftp;
-    }
 
     public WebDriver getDriver() {
         if (wd == null){
@@ -72,8 +63,21 @@ public class ApplicationManager {
             }
             wd.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
             wd.get(properties.getProperty("web.baseUrl"));
+//            webSessionHelper.login(properties.getProperty("web.adminLogin"), properties.getProperty("web.adminPassword"));
         }
         return wd;
+    }
+    public RegistrationHelper registration() {
+        if( registrationHelper == null) {
+            registrationHelper = new RegistrationHelper(this);
+        }
+        return registrationHelper;
+    }
+    public FtpHelper ftp(){
+        if (ftp == null){
+            ftp = new FtpHelper(this);
+        }
+        return  ftp;
     }
     public MailHelper mail(){
         if (mailHelper == null){
@@ -90,4 +94,17 @@ public class ApplicationManager {
     public DbHelper db() {
         return dbHelper;
     }
+    public UserHelper user(){
+        if(userHelper == null){
+            userHelper = new UserHelper(this);
+        }
+        return userHelper;
+    }
+    public  WebSessionHelper webHelper() {
+        if (webSessionHelper == null) {
+            webSessionHelper = new WebSessionHelper(this);
+        }
+        return webSessionHelper;
+    }
+
 }
