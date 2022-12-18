@@ -15,3 +15,6 @@ tasks.withType(JavaCompile) {
 tasks.withType(Test) {
     systemProperty "file.encoding", "UTF-8"
 }
+test {
+		useTestNG()
+}
