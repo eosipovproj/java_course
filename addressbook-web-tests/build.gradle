@@ -53,6 +53,6 @@ task testContacts (type: Test) {
         systemProperty 'verifyUI', "${target}"
     }
     if (project.hasProperty('platform')) {
-        systemProperty 'platform', "${browser}"
+        systemProperty 'platform', "${platform}"
     }
 }
