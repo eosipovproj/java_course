@@ -36,7 +36,7 @@ task testGroups (type: Test) {
         systemProperty 'verifyUI', "${target}"
     }
     if (project.hasProperty('platform')) {
-        systemProperty 'platform', "${browser}"
+        systemProperty 'platform', "${platform}"
     }
 }
 task testContacts (type: Test) {
