@@ -7,7 +7,7 @@ import ru.stqa.java_course.addressbook.model.Groups;
 import java.sql.*;
 
 public class DbConnectionTest {
-    @Test
+    @Test(enabled = false)
     public void  dbConnectionTest(){
         Connection conn = null;
 

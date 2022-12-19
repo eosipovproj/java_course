@@ -32,7 +32,7 @@ public class HbConnectionTest {
         }
     }
 
-    @Test
+    @Test(enabled = false)
     public void hbConnectionTestGroups(){
         Session session = sessionFactory.openSession();
         session.beginTransaction();
