@@ -36,7 +36,7 @@ public class ApplicationManager {
         String target = System.getProperty("target", "local");
         properties.load(new FileReader(new File(String.format("src/test/resources/local.properties", target))));
         dbHelper = new DbHelper();
-        if (browser.equals(properties.getProperty("selenium.server"))) {
+        if ("".equals(properties.getProperty("selenium.server"))) {
             if (browser.equals(Browser.CHROME.browserName())) {
                 wd = new ChromeDriver();
             } else if (browser.equals(Browser.IE.browserName())) {
