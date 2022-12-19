@@ -35,6 +35,9 @@ task testGroups (type: Test) {
     if (project.hasProperty('verifyUI')) {
         systemProperty 'verifyUI', "${target}"
     }
+    if (project.hasProperty('platform')) {
+        systemProperty 'platform', "${browser}"
+    }
 }
 task testContacts (type: Test) {
     useTestNG {
@@ -48,5 +51,8 @@ task testContacts (type: Test) {
     }
     if (project.hasProperty('verifyUI')) {
         systemProperty 'verifyUI', "${target}"
+    }
+    if (project.hasProperty('platform')) {
+        systemProperty 'platform', "${browser}"
     }
 }
