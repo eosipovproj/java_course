@@ -1,11 +1,13 @@
 apply plugin: 'java'
 
 
+
+
 repositories {
     mavenCentral()
 }
-configurations {
-    agent
+repositories {
+    jcenter()
 }
 
 dependencies {
@@ -18,8 +20,7 @@ dependencies {
     implementation 'ch.qos.logback:logback-classic:1.1.5'
     implementation 'mysql:mysql-connector-java:8.0.30'
     implementation 'org.hibernate:hibernate-core:5.6.12.Final'
-    agent "org.aspectj:aspectjweaver:1.8.0"
-    implementation "ru.yandex.qatools.allure:allure-testng-adaptor:1.4.0.RC4"
+    implementation "io.qameta.allure:allure-gradle:2.3"
 }
 
 tasks.withType(JavaCompile) {
@@ -44,25 +45,23 @@ task testGroups (type: Test) {
     if (project.hasProperty('platform')) {
         systemProperty 'platform', "${platform}"
     }
-}
-testGroups.doFirst {
-    jvmArgs "-javaagent:${configurations.agent.singleFile}"
-}
 
-task testContacts (type: Test) {
-    useTestNG {
-        suites 'src/test/resources/testng-contacts.xml'
-    }
-    if (project.hasProperty('browser')) {
-        systemProperty 'browser', "${browser}"
-    }
-    if (project.hasProperty('target')) {
-        systemProperty 'target', "${target}"
-    }
-    if (project.hasProperty('verifyUI')) {
-        systemProperty 'verifyUI', "${target}"
-    }
-    if (project.hasProperty('platform')) {
-        systemProperty 'platform', "${platform}"
+
+    task testContacts(type: Test) {
+        useTestNG {
+            suites 'src/test/resources/testng-contacts.xml'
+        }
+        if (project.hasProperty('browser')) {
+            systemProperty 'browser', "${browser}"
+        }
+        if (project.hasProperty('target')) {
+            systemProperty 'target', "${target}"
+        }
+        if (project.hasProperty('verifyUI')) {
+            systemProperty 'verifyUI', "${target}"
+        }
+        if (project.hasProperty('platform')) {
+            systemProperty 'platform', "${platform}"
+        }
     }
 }
