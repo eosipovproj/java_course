@@ -9,10 +9,12 @@ import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.Browser;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.net.URL;
 import java.time.Duration;
 import java.util.Properties;
 
@@ -48,7 +50,7 @@ public class ApplicationManager {
             DesiredCapabilities capabilities = new DesiredCapabilities();
             capabilities.setBrowserName(browser);
 //            capabilities.setPlatform(Platform.fromString(System.getProperty("platform", "win10")));
-//            wd = new RemoteWebDriver(new URL(properties.getProperty("selenium.server")), capabilities);
+            wd = new RemoteWebDriver(new URL(properties.getProperty("selenium.server")), capabilities);
         }
         wd.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         groupsHelper = new GroupsHelper(wd);
