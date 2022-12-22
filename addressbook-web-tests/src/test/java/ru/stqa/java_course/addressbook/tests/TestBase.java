@@ -3,7 +3,6 @@ package ru.stqa.java_course.addressbook.tests;
 import org.openqa.selenium.remote.Browser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.testng.ITestContext;
 import org.testng.annotations.*;
 import ru.stqa.java_course.addressbook.appmanager.ApplicationManager;
 import ru.stqa.java_course.addressbook.model.ContactData;
@@ -17,16 +16,17 @@ import java.util.stream.Collectors;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
-@Listeners(MyTestListener.class)
+//@Listeners(MyTestListener.class)
 public class TestBase {
     Logger logger = LoggerFactory.getLogger(GroupCreationTests.class);
     protected static ApplicationManager app
             = new ApplicationManager(System.getProperty("browser", Browser.CHROME.browserName()));
 
     @BeforeSuite(alwaysRun = true)
-    public void setUp(ITestContext context) throws Exception {
+    public void setUp() throws Exception {
         app.init();
-        context.setAttribute("app", app);
+//        context.setAttribute("app", app);
+//        ITestContext context
     }
 
     @AfterSuite(alwaysRun = true)
